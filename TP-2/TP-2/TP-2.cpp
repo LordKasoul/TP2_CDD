@@ -127,7 +127,7 @@ void intro(void)
 }
 
 
-// Foonction Temporaire avant d'aller dans une librairie
+// Fonction Temporaire avant d'aller dans une librairie
 int salle1(int& degatArme)
 {
     int numSalle = 0;

@@ -13,7 +13,7 @@ namespace text
 	//Écran titre
 	string titreCompagnie = "KABROCK Ind\n";
 	string realise = "Realise par";
-	string nomDev1 = "Antoine ...\n";
+	string nomDev1 = "Antoine Ruyet\n";
 	string nomDev2 = "Mael Daniel\n";
 	string present = "Vous presente";
 	string titreJeu = "Coincer dans un Donjon\n";
