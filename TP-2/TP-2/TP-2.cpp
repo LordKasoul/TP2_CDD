@@ -100,7 +100,7 @@ void ecranTitre(void)
 }
 
 
-void initialisation(int &vie, int &soin, int &degatArme)
+void initialisation(int &vie, int &soin, int &degatArme, int& vieBoss, int& degatBoss, int& vieMechant, int& degatMechant)
 {
     int chiffreChoix = 0;
     RetourALaLigne(9);
