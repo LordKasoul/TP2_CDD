@@ -296,37 +296,37 @@ int salle1(void)
     return numSalle;
 }
 
-int salle2(bool &clefSalle5)
+int salle2(bool& clefSalle5)
 {
     int numSalle = 0;
     int chiffreChoix = 0;
     bool verif = false;
     do {
-        cout << text::deSalle2;
-        cout << text::deSalle2_1;
-        cout << text::deSalle2_2;
+        cout << text::desSalle2;
+        cout << text::desSalle2_1;
+        cout << text::desSalle2_2;
         cin >> chiffreChoix;
         switch (chiffreChoix)
         {
         case 1:
-            cout << text::deSalle2_choixChemin3;
+            cout << text::desSalle2_choixChemin2;
             numSalle = 4;
             verif = true;
             break;
         case 2:
             if (clefSalle5 == false)
             {
-                cout << text::deSalle2_clef5;
+                cout << text::desSalle2_clef5;
             }
             else
             {
-                cout << text::deSalle2_choixChemin1;
+                cout << text::desSalle2_choixChemin1;
                 numSalle = 5;
                 verif = true;
             }
             break;
         case 3:
-            cout << text::deSalle2_choixChemin2;
+            cout << text::desSalle2_choixChemin3;
             numSalle = 3;
             verif = true;
             break;
@@ -336,5 +336,31 @@ int salle2(bool &clefSalle5)
         }
        }while (verif == false);
     return -1;
+}
+
+
+int salle3(bool& clefSalle5)
+{
+    int choixSalle3 = 0;
+        
+    cout << text::desSalle3_decouverte;
+    cout << text::desSalle3_description;
+    cout << text::desSalle3_Choix;
+    cin >> choixSalle3;
+    switch (choixSalle3)
+    {
+    case 1: 
+        cout << text::desSalle3_CoffreOuvert;
+        break;
+    case 2:
+        cout << text::desSalle3_CoffreFermer;
+        break;
+    default:
+        cout << text::errorSalle;
+
+        break;
+    }
+
+
 }
 
