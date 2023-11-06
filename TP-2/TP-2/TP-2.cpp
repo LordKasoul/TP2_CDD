@@ -49,10 +49,10 @@ void planJeu(void)
             sortie();
             break;
         default:
-            RetourALaLigne(5);
-            TabVersDroite(5);
+            retour(5);
+            tab(5);
             cout << text::errorSalle;
-            RetourALaLigne(5);
+            retour(5);
             this_thread::sleep_for(8000ms);
             numSalle = -1;
             break;
@@ -63,38 +63,38 @@ void planJeu(void)
 void ecranTitre(void)
 {
     system("cls");
-    RetourALaLigne(12);
-    TabVersDroite(7);
+    retour(12);
+    tab(7);
     cout << text::titreCompagnie;
     this_thread::sleep_for(3000ms);
     
     system("cls");
-    RetourALaLigne(12);
-    TabVersDroite(7);
+    retour(12);
+    tab(7);
     cout << text::realise;
     this_thread::sleep_for(1500ms);
     
     system("cls");
-    RetourALaLigne(12);
-    TabVersDroite(7);;
+    retour(12);
+    tab(7);;
     cout << text::nomDev1;
     this_thread::sleep_for(2000ms);
     
     system("cls");
-    RetourALaLigne(12);
-    TabVersDroite(7);
+    retour(12);
+    tab(7);
     cout << text::nomDev2;
     this_thread::sleep_for(2000ms);
     
     system("cls");
-    RetourALaLigne(12);
-    TabVersDroite(7);
+    retour(12);
+    tab(7);
     cout << text::present;
     this_thread::sleep_for(1500ms);
     
     system("cls");
-    RetourALaLigne(12);
-    TabVersDroite(6);
+    retour(12);
+    tab(6);
     cout << text::titreJeu;
     this_thread::sleep_for(4000ms);
     
@@ -109,56 +109,56 @@ void initialisation(int &vie, int &soin, int &degatArme, int& vieBoss, int& dega
     bool verif = true;
     do 
     {
-        RetourALaLigne(9);
-        TabVersDroite(5);
+        retour(9);
+        tab(5);
         cout << text::initia1;
-        TabVersDroite(5);
+        tab(5);
         cout << text::initia2;
-        TabVersDroite(6);
+        tab(6);
         cout << text::choixNiveauFacile;
-        TabVersDroite(6);
+        tab(6);
         cout << text::choixNiveauInter;
-        TabVersDroite(6);
+        tab(6);
         cout << text::choixNiveauDiffi;
-        TabVersDroite(6);
+        tab(6);
         cout << text::fleche;
         cin >> chiffreChoix;    
         system("cls");
         switch (chiffreChoix)
         {
         case 1:
-            RetourALaLigne(12);
-            TabVersDroite(5);
+            retour(12);
+            tab(5);
             cout << text::choixFacile;
-            TabVersDroite(7);
+            tab(7);
             vie = constante::PV_FACILE;
             soin = constante::SOIN_FACILE;
             degatArme = constante::DEG_ARME_FACILE;
             this_thread::sleep_for(3000ms);
             break;
         case 2:
-            RetourALaLigne(12);
-            TabVersDroite(5);
+            retour(12);
+            tab(5);
             cout << text::choixInter;
-            TabVersDroite(7);
+            tab(7);
             vie = constante::PV_INTER;
             soin = constante::SOIN_INTER;
             degatArme = constante::DEG_ARME_INTER;
             this_thread::sleep_for(3000ms);
             break;
         case 3:
-            RetourALaLigne(12);
-            TabVersDroite(5);
+            retour(12);
+            tab(5);
             cout << text::choixDiffi;
-            TabVersDroite(7);
+            tab(7);
             vie = constante::PV_DIFFI;
             soin = constante::SOIN_DIFFI;
             degatArme = constante::DEG_ARME_DIFFI;
             this_thread::sleep_for(3000ms);
             break;
         default:
-            RetourALaLigne(12);
-            TabVersDroite(5);
+            retour(12);
+            tab(5);
             cout << text::erreurSaisie;
             verif = false;
             this_thread::sleep_for(3000ms);
@@ -172,20 +172,20 @@ void initialisation(int &vie, int &soin, int &degatArme, int& vieBoss, int& dega
 int intro(void)
 {
     int numSalle = 0;
-    RetourALaLigne(9);
-    TabVersDroite(5);
+    retour(9);
+    tab(5);
     cout << text::intro1;
-    TabVersDroite(6);
+    tab(6);
     cout << text::intro2;
-    TabVersDroite(5);
+    tab(5);
     cout << text::intro3;
-    TabVersDroite(5);
+    tab(5);
     cout << text::introChoix;
-    TabVersDroite(6);
+    tab(6);
     cout << text::introExploration;
-    TabVersDroite(6);
+    tab(6);
     cout << text::introPasseChemin;
-    TabVersDroite(7);
+    tab(7);
     cout << text::fleche;
     cin >> numSalle;
     (numSalle == 1) ? numSalle = 1 : numSalle = 66;
@@ -195,10 +195,10 @@ int intro(void)
 
 void sortie(void)
 {
-    RetourALaLigne(12);
-    TabVersDroite(4);
+    retour(12);
+    tab(4);
     cout << text::messSortie;
-    RetourALaLigne(12);
+    retour(12);
     this_thread::sleep_for(5000ms);
     exit(EXIT_SUCCESS);
 }
@@ -211,22 +211,22 @@ int salle1(void)
     bool verif = true;
     do
     {
-        RetourALaLigne(8);
-        TabVersDroite(5);
+        retour(8);
+        tab(5);
         cout << text::desSalle1;
-        TabVersDroite(4);
+        tab(4);
         cout << text::desSalle12;
-        TabVersDroite(3);
+        tab(3);
         cout << text::desSalle13;
-        TabVersDroite(2);
+        tab(2);
         cout << text::desSalle13Bis;
-        TabVersDroite(6);
+        tab(6);
         cout << text::propositionSalle1;
-        TabVersDroite(6);
+        tab(6);
         cout << text::choixSalle11;
-        TabVersDroite(6);
+        tab(6);
         cout << text::choixSalle12;
-        TabVersDroite(6);
+        tab(6);
         cout << text::fleche;
         cin >> chiffreChoix;
         switch (chiffreChoix)
@@ -247,8 +247,8 @@ int salle1(void)
             }
         default:
             system("cls");
-            RetourALaLigne(12);
-            TabVersDroite(5);
+            retour(12);
+            tab(5);
             cout << text::erreurSaisie;
             verif = false;
             this_thread::sleep_for(5000ms);
