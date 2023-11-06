@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-void RetourALaLigne(int i)
+void retour(int i)
 {
 	for (int n(0);n!=i;n++)
 	{
@@ -9,7 +9,7 @@ void RetourALaLigne(int i)
 	}
 }
 
-void TabVersDroite(int i)
+void tab(int i)
 {
 	for (int n(0);n != i;n++)
 	{
@@ -17,7 +17,7 @@ void TabVersDroite(int i)
 	}
 }
 
-void EspaceVersDroite(int i)
+void espace(int i)
 {
 	for (int n(0);n != i;n++)
 	{

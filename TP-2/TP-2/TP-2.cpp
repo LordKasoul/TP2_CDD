@@ -32,7 +32,7 @@ void planJeu(void)
 {
     int numSalle = 0, vie = 0, soin = 0, degatArme = 0, vieBoss = 0, degatBoss = 0, vieMechant = 0, degatMechant = 0;
 
-    ecranTitre();
+    //ecranTitre();
     initialisation(vie, soin, degatArme, vieBoss,  degatBoss, vieMechant, degatMechant);
     numSalle = intro();
     do 
@@ -57,9 +57,7 @@ void planJeu(void)
             numSalle = -1;
             break;
         }
-
     } while (numSalle != -1);
-    //Les prochaines salles ne seront accecible seulement depuis les autres fonctions salle
 }
 
 void ecranTitre(void)
@@ -132,35 +130,38 @@ void initialisation(int &vie, int &soin, int &degatArme, int& vieBoss, int& dega
             RetourALaLigne(12);
             TabVersDroite(5);
             cout << text::choixFacile;
+            TabVersDroite(7);
             vie = constante::PV_FACILE;
             soin = constante::SOIN_FACILE;
             degatArme = constante::DEG_ARME_FACILE;
-            this_thread::sleep_for(5000ms);
+            this_thread::sleep_for(3000ms);
             break;
         case 2:
             RetourALaLigne(12);
             TabVersDroite(5);
             cout << text::choixInter;
+            TabVersDroite(7);
             vie = constante::PV_INTER;
             soin = constante::SOIN_INTER;
             degatArme = constante::DEG_ARME_INTER;
-            this_thread::sleep_for(5000ms);
+            this_thread::sleep_for(3000ms);
             break;
         case 3:
             RetourALaLigne(12);
             TabVersDroite(5);
             cout << text::choixDiffi;
+            TabVersDroite(7);
             vie = constante::PV_DIFFI;
             soin = constante::SOIN_DIFFI;
             degatArme = constante::DEG_ARME_DIFFI;
-            this_thread::sleep_for(5000ms);
+            this_thread::sleep_for(3000ms);
             break;
         default:
             RetourALaLigne(12);
             TabVersDroite(5);
             cout << text::erreurSaisie;
             verif = false;
-            this_thread::sleep_for(5000ms);
+            this_thread::sleep_for(3000ms);
             break;
         }
         system("cls");
@@ -172,7 +173,13 @@ int intro(void)
 {
     int numSalle = 0;
     RetourALaLigne(9);
+    TabVersDroite(5);
+    cout << text::intro1;
     TabVersDroite(6);
+    cout << text::intro2;
+    TabVersDroite(5);
+    cout << text::intro3;
+    TabVersDroite(5);
     cout << text::introChoix;
     TabVersDroite(6);
     cout << text::introExploration;
@@ -189,8 +196,9 @@ int intro(void)
 void sortie(void)
 {
     RetourALaLigne(12);
-    TabVersDroite(6);
+    TabVersDroite(4);
     cout << text::messSortie;
+    RetourALaLigne(12);
     this_thread::sleep_for(5000ms);
     exit(EXIT_SUCCESS);
 }
@@ -203,13 +211,22 @@ int salle1(void)
     bool verif = true;
     do
     {
+        RetourALaLigne(8);
+        TabVersDroite(5);
         cout << text::desSalle1;
+        TabVersDroite(4);
         cout << text::desSalle12;
+        TabVersDroite(3);
         cout << text::desSalle13;
+        TabVersDroite(2);
         cout << text::desSalle13Bis;
+        TabVersDroite(6);
         cout << text::propositionSalle1;
+        TabVersDroite(6);
         cout << text::choixSalle11;
+        TabVersDroite(6);
         cout << text::choixSalle12;
+        TabVersDroite(6);
         cout << text::fleche;
         cin >> chiffreChoix;
         switch (chiffreChoix)
@@ -221,9 +238,15 @@ int salle1(void)
         case 2:
             if (coffreOuvert == 1)
             {
-                salle2();
+                numSalle = 2;
+            }
+            else
+            {
+                cout << text::coffreNonOuvert;
+                break;
             }
         default:
+            system("cls");
             RetourALaLigne(12);
             TabVersDroite(5);
             cout << text::erreurSaisie;

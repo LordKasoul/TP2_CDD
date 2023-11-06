@@ -1,4 +1,4 @@
 #pragma once
-void RetourALaLigne(int i);
-void TabVersDroite(int i);
-void EspaceVersDroite(int i);
+void retour(int i);
+void tab(int i);
+void espace(int i);

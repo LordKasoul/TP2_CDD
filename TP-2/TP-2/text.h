@@ -21,7 +21,7 @@ namespace text
 
 	
 	// Initialisation
-	string initia1 = "Avant de commncer votre grande aventure.\n";
+	string initia1 = "Avant de commancer votre grande aventure.\n";
 	string initia2 = "Choississez votre niveau de difficultee.\n";
 	string choixNiveauFacile = "1 - Facile\n";
 	string choixNiveauInter = "2 - Intermediaire\n";
@@ -32,10 +32,13 @@ namespace text
 	string choixDiffi = "Vous avez choisi le niveau de Difficile\n";
 
 	// Introduction
+	string intro1 = "Partie chercher du bois dans la foret proche du village.\n";
+	string intro2 = "Vous appercevez entre deux arbres un escalier.\n";
+	string intro3 = "Celui ci semble descendre dans les profondeur de la foret.\n";
 	string introChoix = "Voulez vous explorer ses escaliser ?\n";
 	string introExploration = "1 - Commencer votre aventure.\n";
 	string introPasseChemin = "0 - Vous passer votre chemin.\n";
-	string messSortie = "Vous passer votre chemin et faites votre vie.\n";
+	string messSortie = "Vous passer votre chemin sans vous procuper de ces escaliers.\n";
 
 
 	//Salle 1
