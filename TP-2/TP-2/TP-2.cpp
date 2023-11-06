@@ -18,7 +18,7 @@ void initialisation(int &vie, int &soin, int& degatArme, int& vieBoss, int& dega
 int intro(void);
 void sortie(void);
 int salle1(void);
-int salle2(void);
+int salle2(bool &cleSalle5);
 
 using namespace std;
 int main()
@@ -31,6 +31,7 @@ int main()
 void planJeu(void)
 {
     int numSalle = 0, vie = 0, soin = 0, degatArme = 0, vieBoss = 0, degatBoss = 0, vieMechant = 0, degatMechant = 0;
+    bool cleSalle5 = false;
 
     //ecranTitre();
     initialisation(vie, soin, degatArme, vieBoss,  degatBoss, vieMechant, degatMechant);
@@ -43,7 +44,7 @@ void planJeu(void)
             numSalle = salle1();
             break;
         case 2:
-            numSalle = salle2();
+            numSalle = salle2(cleSalle5);
             break;
         case 66:
             sortie();
@@ -295,8 +296,45 @@ int salle1(void)
     return numSalle;
 }
 
-int salle2(void)
+int salle2(bool &clefSalle5)
 {
     int numSalle = 0;
-    return numSalle;
+    int chiffreChoix = 0;
+    bool verif = false;
+    do {
+        cout << text::deSalle2;
+        cout << text::deSalle2_1;
+        cout << text::deSalle2_2;
+        cin >> chiffreChoix;
+        switch (chiffreChoix)
+        {
+        case 1:
+            cout << text::deSalle2_choixChemin3;
+            numSalle = 4;
+            verif = true;
+            break;
+        case 2:
+            if (clefSalle5 == false)
+            {
+                cout << text::deSalle2_clef5;
+            }
+            else
+            {
+                cout << text::deSalle2_choixChemin1;
+                numSalle = 5;
+                verif = true;
+            }
+            break;
+        case 3:
+            cout << text::deSalle2_choixChemin2;
+            numSalle = 3;
+            verif = true;
+            break;
+        default:
+            cout << text::errorSalle;
+            break;
+        }
+       }while (verif == false);
+    return -1;
 }
+

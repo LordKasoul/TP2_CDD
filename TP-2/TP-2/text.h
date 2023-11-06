@@ -60,5 +60,16 @@ namespace text
 	string versPorte = "Vous poussez la seul et unique porte de cette piece.\n";
 	string versPorte_2 = "Vous avez un peu peur mais vous etes aussi plein d'envie d'aventure.\n";
 
+	//Salle 2 
+	string deSalle2 = "Vous entrez dans une nouvelle salle, la numero 2, l'environement change, l'atmosphere devient lourde et vous entendez une respiration impossante venir d'une piece a coter.\n";
+	string deSalle2_1 = "En annalysant la piece vous voyez qu'il y a 3 chemins et que vous allez devoir faire un choix pour acceder a la salle suivante.\n";
+	string deSalle2_2 = "Soit 2- vous allez tout droit , soit 1- vous allez a gauche soit 3- a droite ?\n";
+	string deSalle2_choixChemin3 = "Vous avez choisi d'aller sur le chemin de droite, vous entrez dans la salle numero 3.\n";
+	string deSalle2_choixChemin1 = "Vous avez choisi d'aller sur le chemin de gauche, vous accedez a la salle numero 4.\n";
+	string deSalle2_choixChemin2 = "Vous avez choisi d'aller sur le chemin tout droit, vous accedez a la salle numero 5. \n";
+	string deSalle2_choixChemin2_1 = "Le maitre du jeu a detecter que vous avez obtenu la cle dans la salle numero 3 vous entrez dans la salle 5.\n";
+	string deSalle2_choixChemin2_2 = "Le maitre du jeu a detecter que vous n avez pas obtenu la cle dans une salle antierieur vous ne pouvez entrez dans la salle 5.\n";
+	string deSalle2_3 = "Vous quitter la salle numero 2, Bonne chance pour la suite de votre aventure....En esperant qu elle soit pas la derniere.\n";
+	string deSalle2_clef5 = "La porte de la salle semble bloquer.Vous n'avez pas la clef.\n";
 }
 	
