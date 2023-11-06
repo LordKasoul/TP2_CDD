@@ -211,6 +211,7 @@ int salle1(void)
     bool verif = true;
     do
     {
+        system("cls");
         retour(8);
         tab(5);
         cout << text::desSalle1;
@@ -222,8 +223,11 @@ int salle1(void)
         cout << text::desSalle13Bis;
         tab(6);
         cout << text::propositionSalle1;
-        tab(6);
-        cout << text::choixSalle11;
+        if (coffreOuvert == 0)
+        {
+            tab(6);
+            cout << text::choixSalle11;
+        }
         tab(6);
         cout << text::choixSalle12;
         tab(6);
@@ -232,17 +236,49 @@ int salle1(void)
         switch (chiffreChoix)
         {
         case 1:
-            cout << text::desSalle1;
-            coffreOuvert = 1;
-            break;
-        case 2:
             if (coffreOuvert == 1)
             {
-                numSalle = 2;
+                cout << text::coffreOuvert;
+                this_thread::sleep_for(2500ms);
+                verif = false;
             }
             else
             {
+                system("cls");
+                retour(8);
+                tab(5);
+                cout << text::ouvertureCoffreSalle1;
+                tab(6);
+                cout << text::ouvertureCoffreSalle1_2;
+                tab(4);
+                cout << text::ouvertureCoffreSalle1_3;
+                coffreOuvert = 1;
+                verif = false;
+                this_thread::sleep_for(5000ms);
+                break;
+            }
+        case 2:
+            if (coffreOuvert == 1)
+            {
+                system("cls");
+                retour(12);
+                tab(5);
+                cout << text::versPorte;
+                tab(4);
+                cout << text::versPorte_2;
+                verif = true;
+                numSalle = 2;
+                this_thread::sleep_for(5000ms);
+                break;
+            }
+            else
+            {
+                system("cls");
+                retour(12);
+                tab(4);
                 cout << text::coffreNonOuvert;
+                verif = false;
+                this_thread::sleep_for(3500ms);
                 break;
             }
         default:
@@ -251,7 +287,7 @@ int salle1(void)
             tab(5);
             cout << text::erreurSaisie;
             verif = false;
-            this_thread::sleep_for(5000ms);
+            this_thread::sleep_for(3500ms);
             break;
         }
     } while (verif != true);
@@ -262,5 +298,5 @@ int salle1(void)
 int salle2(void)
 {
     int numSalle = 0;
-    return -1;
+    return numSalle;
 }

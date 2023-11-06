@@ -45,10 +45,20 @@ namespace text
 	string desSalle1 = "Vous arriver dans une salle lugubre.\n";
 	string desSalle12 = "La seul lumiere de la piece proviens d'un luminere au plafond.\n";
 	string desSalle13 = "Dans cette salle seul un coffre et une porte tout deux fermes, sembles d'interet.\n";
-	string desSalle13Bis = "Dans cette salle il n'y-a rien d'interressant de plus que le coffre aue vous avez deja fouillez.\n";
+	string desSalle13Bis = "Dans cette salle il n'y-a rien d'interressant de plus que le coffre que vous avez deja fouillez.\n";
 	string propositionSalle1 = "Que comptez vous faire ?\n";
 	string choixSalle11 = "1 - Ouvrir le coffre\n";
-	string choixSalle12 = "2 - Ouvri la porte\n";
-	string coffreNonOuvert = "Votre instinct et votre curiosité vous inscite a ouvrir ce coffre.\n";
+	string choixSalle12 = "2 - Ouvrir la porte\n";
+
+	string coffreNonOuvert = "Votre instinct et votre curiosite vous inscite a ouvrir ce coffre.\n";
+	string ouvertureCoffreSalle1 = "Vous ouvrer avec un peu de force ce vieux coffre.\n";
+	string ouvertureCoffreSalle1_2 = "A l'interrieur ce trouve une epee.\n";
+	string ouvertureCoffreSalle1_3 = "Vous la saisisser et vous vous sentez pret pour ce qui vous attend.\n";
+
+	string coffreOuvert = "Vous avez deja ouvert ce coffre.\n";
+
+	string versPorte = "Vous poussez la seul et unique porte de cette piece.\n";
+	string versPorte_2 = "Vous avez un peu peur mais vous etes aussi plein d'envie d'aventure.\n";
+
 }
 	
