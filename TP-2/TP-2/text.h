@@ -5,28 +5,38 @@ using namespace std;
 namespace text
 {
 	// Messages erreurs
-	string errorSalle = "ERREUR : Une erreur dans le choix de la prochaine salle.";
+	string errorSalle = "ERREUR : Une erreur dans le choix de la prochaine salle.\n";
+	string erreurSaisie = "ERREUR : Votre choix n'est pas possible.\n";
 
 	// Text general
 	string fleche = "--> ";
 
 	//Écran titre
 	string titreCompagnie = "KABROCK Ind\n";
-	string realise = "Realise par";
+	string realise = "Realise par\n";
 	string nomDev1 = "Antoine Ruyet\n";
 	string nomDev2 = "Mael Daniel\n";
-	string present = "Vous presente";
+	string present = "Vous presente\n";
 	string titreJeu = "Coincer dans un Donjon\n";
 
 	
-	// introduction
-	string intro1 = "Avant de commncer votre grande aventure.\n";
-	string intro2 = "Choississez votre niveau de difficultée.\n";
+	// Initialisation
+	string initia1 = "Avant de commncer votre grande aventure.\n";
+	string initia2 = "Choississez votre niveau de difficultee.\n";
 	string choixNiveauFacile = "1 - Facile\n";
 	string choixNiveauInter = "2 - Intermediaire\n";
 	string choixNiveauDiffi = "3 - Difficile\n";
 
-	string choixFacile = "Vous avez choisi le niveau de Facile";
+	string choixFacile = "Vous avez choisi le niveau de Facile.\n";
+	string choixInter = "Vous avez choisi le niveau de Intermediaire.\n";
+	string choixDiffi = "Vous avez choisi le niveau de Difficile\n";
+
+	// Introduction
+	string introChoix = "Voulez vous explorer ses escaliser ?\n";
+	string introExploration = "1 - Commencer votre aventure.\n";
+	string introPasseChemin = "0 - Vous passer votre chemin.\n";
+	string messSortie = "Vous passer votre chemin et faites votre vie.\n";
+
 
 	//Salle 1
 	string desSalle1 = "Vous arriver dans une salle lugubre.\n";

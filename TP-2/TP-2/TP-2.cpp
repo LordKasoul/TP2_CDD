@@ -2,6 +2,7 @@
 #include <iostream>
 #include <locale> // Pour pouvoir avoir les accent. Mais ne semble pas marcher
 #include <thread> // Pour pouvoir faire des pauses sur l'affichage
+#include <stdlib.h>
 
 //Import fichier h
 #include "constante.h"
@@ -14,14 +15,15 @@ void planJeu(void);
 // Déclaration des fonctions TEMPORAIRES (Pour test puis en librairies)
 void ecranTitre(void);
 void initialisation(int &vie, int &soin, int& degatArme, int& vieBoss, int& degatBoss, int& vieMechant, int& degatMechant);
-void intro(void);
-int salle1(int& degatArme);
+int intro(void);
+void sortie(void);
+int salle1(void);
+int salle2(void);
 
 using namespace std;
 int main()
 {
     //locale::global(locale("fr-FR"));
-    cout << "Good morning New York\n";
     planJeu();
 }
 
@@ -32,16 +34,19 @@ void planJeu(void)
 
     ecranTitre();
     initialisation(vie, soin, degatArme, vieBoss,  degatBoss, vieMechant, degatMechant);
-    numSalle = salle1(degatArme);
+    numSalle = intro();
     do 
     {
         switch (numSalle)
         {
         case 1:
-            numSalle = salle1(degatArme);
+            numSalle = salle1();
             break;
         case 2:
-            //numSalle = salle1(degatArme);
+            numSalle = salle2();
+            break;
+        case 66:
+            sortie();
             break;
         default:
             RetourALaLigne(5);
@@ -63,37 +68,37 @@ void ecranTitre(void)
     RetourALaLigne(12);
     TabVersDroite(7);
     cout << text::titreCompagnie;
-    this_thread::sleep_for(5000ms);
+    this_thread::sleep_for(3000ms);
     
     system("cls");
     RetourALaLigne(12);
     TabVersDroite(7);
     cout << text::realise;
-    this_thread::sleep_for(2000ms);
+    this_thread::sleep_for(1500ms);
     
     system("cls");
     RetourALaLigne(12);
     TabVersDroite(7);;
     cout << text::nomDev1;
-    this_thread::sleep_for(3000ms);
+    this_thread::sleep_for(2000ms);
     
     system("cls");
     RetourALaLigne(12);
     TabVersDroite(7);
     cout << text::nomDev2;
-    this_thread::sleep_for(3000ms);
+    this_thread::sleep_for(2000ms);
     
     system("cls");
     RetourALaLigne(12);
     TabVersDroite(7);
     cout << text::present;
-    this_thread::sleep_for(2000ms);
+    this_thread::sleep_for(1500ms);
     
     system("cls");
     RetourALaLigne(12);
     TabVersDroite(6);
     cout << text::titreJeu;
-    this_thread::sleep_for(5000ms);
+    this_thread::sleep_for(4000ms);
     
     system("cls");
 
@@ -103,34 +108,136 @@ void ecranTitre(void)
 void initialisation(int &vie, int &soin, int &degatArme, int& vieBoss, int& degatBoss, int& vieMechant, int& degatMechant)
 {
     int chiffreChoix = 0;
-    RetourALaLigne(9);
-    cout << text::intro1;
-    cout << text::intro2;
-    cout << text::choixNiveauFacile;
-    cout << text::choixNiveauInter;
-    cout << text::choixNiveauDiffi;
-    cout << text::fleche;
-    cin >> chiffreChoix;
-    switch (chiffreChoix)
+    bool verif = true;
+    do 
     {
+        RetourALaLigne(9);
+        TabVersDroite(5);
+        cout << text::initia1;
+        TabVersDroite(5);
+        cout << text::initia2;
+        TabVersDroite(6);
+        cout << text::choixNiveauFacile;
+        TabVersDroite(6);
+        cout << text::choixNiveauInter;
+        TabVersDroite(6);
+        cout << text::choixNiveauDiffi;
+        TabVersDroite(6);
+        cout << text::fleche;
+        cin >> chiffreChoix;    
+        system("cls");
+        switch (chiffreChoix)
+        {
         case 1:
+            RetourALaLigne(12);
+            TabVersDroite(5);
             cout << text::choixFacile;
             vie = constante::PV_FACILE;
             soin = constante::SOIN_FACILE;
+            degatArme = constante::DEG_ARME_FACILE;
+            this_thread::sleep_for(5000ms);
             break;
-    }
+        case 2:
+            RetourALaLigne(12);
+            TabVersDroite(5);
+            cout << text::choixInter;
+            vie = constante::PV_INTER;
+            soin = constante::SOIN_INTER;
+            degatArme = constante::DEG_ARME_INTER;
+            this_thread::sleep_for(5000ms);
+            break;
+        case 3:
+            RetourALaLigne(12);
+            TabVersDroite(5);
+            cout << text::choixDiffi;
+            vie = constante::PV_DIFFI;
+            soin = constante::SOIN_DIFFI;
+            degatArme = constante::DEG_ARME_DIFFI;
+            this_thread::sleep_for(5000ms);
+            break;
+        default:
+            RetourALaLigne(12);
+            TabVersDroite(5);
+            cout << text::erreurSaisie;
+            verif = false;
+            this_thread::sleep_for(5000ms);
+            break;
+        }
+        system("cls");
+    } while (verif != true);
+
 }
 
-void intro(void)
+int intro(void)
 {
+    int numSalle = 0;
+    RetourALaLigne(9);
+    TabVersDroite(6);
+    cout << text::introChoix;
+    TabVersDroite(6);
+    cout << text::introExploration;
+    TabVersDroite(6);
+    cout << text::introPasseChemin;
+    TabVersDroite(7);
+    cout << text::fleche;
+    cin >> numSalle;
+    (numSalle == 1) ? numSalle = 1 : numSalle = 66;
+    system("cls");
+    return numSalle;
+}
 
+void sortie(void)
+{
+    RetourALaLigne(12);
+    TabVersDroite(6);
+    cout << text::messSortie;
+    this_thread::sleep_for(5000ms);
+    exit(EXIT_SUCCESS);
 }
 
 
 // Fonction Temporaire avant d'aller dans une librairie
-int salle1(int& degatArme)
+int salle1(void)
+{
+    int numSalle = 0, chiffreChoix = 0, coffreOuvert = 0;
+    bool verif = true;
+    do
+    {
+        cout << text::desSalle1;
+        cout << text::desSalle12;
+        cout << text::desSalle13;
+        cout << text::desSalle13Bis;
+        cout << text::propositionSalle1;
+        cout << text::choixSalle11;
+        cout << text::choixSalle12;
+        cout << text::fleche;
+        cin >> chiffreChoix;
+        switch (chiffreChoix)
+        {
+        case 1:
+            cout << text::desSalle1;
+            coffreOuvert = 1;
+            break;
+        case 2:
+            if (coffreOuvert == 1)
+            {
+                salle2();
+            }
+        default:
+            RetourALaLigne(12);
+            TabVersDroite(5);
+            cout << text::erreurSaisie;
+            verif = false;
+            this_thread::sleep_for(5000ms);
+            break;
+        }
+    } while (verif != true);
+
+    return numSalle;
+}
+
+int salle2(void)
 {
     int numSalle = 0;
-    return numSalle;
-
+    return -1;
 }
