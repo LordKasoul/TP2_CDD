@@ -19,6 +19,7 @@ int intro(void);
 void sortie(void);
 int salle1(void);
 int salle2(bool &cleSalle5);
+int salle3(bool& clefSalle5);
 
 using namespace std;
 int main()
@@ -46,9 +47,13 @@ void planJeu(void)
         case 2:
             numSalle = salle2(cleSalle5);
             break;
+        case 3:
+            numSalle = salle3();
+            break;
         case 66:
             sortie();
             break;
+        
         default:
             retour(5);
             tab(5);
@@ -335,32 +340,51 @@ int salle2(bool& clefSalle5)
             break;
         }
        }while (verif == false);
-    return -1;
+       cout << numSalle;
+    return numSalle;
 }
 
 
 int salle3(bool& clefSalle5)
 {
-    int choixSalle3 = 0;
-        
-    cout << text::desSalle3_decouverte;
-    cout << text::desSalle3_description;
-    cout << text::desSalle3_Choix;
-    cin >> choixSalle3;
-    switch (choixSalle3)
+    bool verif = false;
+    int choixSalle3 = 0, numSalle = 0;
+    do
     {
-    case 1: 
-        cout << text::desSalle3_CoffreOuvert;
-        break;
-    case 2:
-        cout << text::desSalle3_CoffreFermer;
-        break;
-    default:
-        cout << text::errorSalle;
+        cout << text::desSalle3_decouverte;
+        cout << text::desSalle3_description;
+        cout << text::desSalle3_Choix;
 
-        break;
-    }
+        cin >> choixSalle3;
+        switch (choixSalle3)
+        {
+        case 1:
+            if (clefSalle5 == true)
+            {
+                cout << text::desSalle3_Clef5;
+            }
+            else
+            {
+            cout << text::desSalle3_CoffreOuvert;
+            this_thread::sleep_for(4000ms);
+            clefSalle5 = true;
+            verif = true;
+            }
+            break;
+        case 2:
+            cout << text::desSalle3_CoffreFermer;
+            this_thread::sleep_for(4000ms);
+            verif = true;
+            numSalle = 2;
+            break;
+        default:
+            cout << text::errorSalle;
+            this_thread::sleep_for(4000ms);
+            verif = false;
+            break;
+        }
+    } while (verif != true);
 
-
+    return numSalle;
 }
 

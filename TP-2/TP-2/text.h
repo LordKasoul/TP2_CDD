@@ -79,5 +79,6 @@ namespace text
 	string desSalle3_Choix = "Vous avez 1- le choix de l'ouvrir ou 2- de passer votre chemin.\n";
 	string desSalle3_CoffreOuvert = "Vous avez choisi d'ouvrir le coffre, vous obtenez une clef pour la prochaine salle.\n";
 	string desSalle3_CoffreFermer = "Vous avez chosi de faire demi tour.\n";
+	string desSalle3_Clef5 = "Vous avez deja recupere la clef de la salle 5.\n";
 }
 	
