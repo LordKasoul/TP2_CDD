@@ -5,7 +5,7 @@ using namespace std;
 namespace text
 {
 	// Messages erreurs
-	string errorSalle = "ERREUR : Une erreur dans le choix de la prochaine salle.\n";
+	string erreurSalle = "ERREUR : Une erreur dans le choix de la prochaine salle.\n";
 	string erreurSaisie = "ERREUR : Votre choix n'est pas possible.\n";
 
 	// Text general
@@ -61,16 +61,24 @@ namespace text
 	string versPorte_2 = "Vous avez un peu peur mais vous etes aussi plein d'envie d'aventure.\n";
 
 	//Salle 2 
-	string desSalle2 = "Vous entrez dans une nouvelle salle, la numero 2, l'environement change, l'atmosphere devient lourde et vous entendez une respiration impossante venir d'une piece a coter.\n";
-	string desSalle2_1 = "En annalysant la piece vous voyez qu'il y a 3 chemins et que vous allez devoir faire un choix pour acceder a la salle suivante.\n";
-	string desSalle2_2 = "Soit 2- vous allez tout droit , soit 1- vous allez a gauche soit 3- a droite ?\n";
-	string desSalle2_choixChemin3 = "Vous avez choisi d'aller sur le chemin de droite, vous entrez dans la salle numero 3.\n";
-	string desSalle2_choixChemin1 = "Vous avez choisi d'aller sur le chemin de gauche, vous accedez a la salle numero 4.\n";
-	string desSalle2_choixChemin2 = "Vous avez choisi d'aller sur le chemin tout droit, vous accedez a la salle numero 5. \n";
-	string desSalle2_choixChemin2_1 = "Le maitre du jeu a detecter que vous avez obtenu la cle dans la salle numero 3 vous entrez dans la salle 5.\n";
-	string desSalle2_choixChemin2_2 = "Le maitre du jeu a detecter que vous n avez pas obtenu la cle dans une salle antierieur vous ne pouvez entrez dans la salle 5.\n";
-	string desSalle2_3 = "Vous quitter la salle numero 2, Bonne chance pour la suite de votre aventure....En esperant qu elle soit pas la derniere.\n";
-	string desSalle2_clef5 = "La porte de la salle semble bloquer.Vous n'avez pas la clef.\n";
+
+	string desSalle2_1 = "Apres avoir monter des escalier, vous entrez dans la deuxieme salle.\n";
+	string desSalle2_2 = "L'environement change, l'atmosphere devient lourde.\n";
+	string desSalle2_3 = "il vous semble entendre une respiration impossante venir de la piece a votre gauche.\n";
+	string desSalle2_4 = "Vous remarquer au total 3 portes en plus des escalier.\n";
+	string propositionSalle2 = "Quel porte voulez vous utilisee ?\n";
+	string choixSalle2_1 = "1 - la porte a gauche. (salle 4)\n";
+	string choixSalle2_2 = "2 - La porte en face. (salle 5)\n";
+	string choixSalle2_3 = "3 - La porte a droite. (salle 3)\n";
+	string choixSalle2_4 = "4 - Les escaliers. (salle 1)\n";
+	string Salle2_choixChemin1 = "Vous avez decidez d'entrer dans la piece a votre gauche. (salle 4)\n";
+	string Salle2_choixChemin2 = "Vous avez decidez d'entrer dans la piece a en face de vous. (salle 5)\n";
+	string Salle2_choixChemin3 = "Vous avez decidez d'entrer dans la piece a votre droite. (salle 3)\n";
+	string Salle2_choixChemin4 = "Vous avez decidez de reprendre les escaliers. (salle 1)\n";
+	string Salle2_choixChemin2_1 = "Le maitre du jeu a detecter que vous avez obtenu la cle dans la salle numero 3 vous entrez dans la salle 5.\n";
+	string Salle2_choixChemin2_2 = "Le maitre du jeu a detecter que vous n avez pas obtenu la cle dans une salle antierieur vous ne pouvez entrez dans la salle 5.\n";
+	string deSalle2_3 = "Vous quitter la salle numero 2, Bonne chance pour la suite de votre aventure....En esperant qu elle soit pas la derniere.\n";
+	string deSalle2_clef5 = "La porte de la salle semble bloquer.Vous n'avez pas la clef.\n";
 
 
 	//Salle 3

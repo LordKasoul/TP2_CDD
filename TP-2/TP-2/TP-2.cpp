@@ -14,11 +14,13 @@ void planJeu(void);
 
 // Déclaration des fonctions TEMPORAIRES (Pour test puis en librairies)
 void ecranTitre(void);
-void initialisation(int &vie, int &soin, int& degatArme, int& vieBoss, int& degatBoss, int& vieMechant, int& degatMechant);
+void initialisation(int &vie, int &soin, int &degatArme, int &vieBoss, int &degatBoss, int &vieMechant1, int &degatMechant1, int &vieMechant2);
 int intro(void);
-void sortie(void);
+bool mort(void);
 int salle1(void);
 int salle2(bool &cleSalle5);
+int salle4(int &vie, int &soin, int &degatArme, int &vieMechant1, int &degatMechant1, bool &clefSalle7);
+int combat(int& vie, int& soin, int& degatArme, int& vieMechant1, int& degatMechant1);
 int salle3(bool& clefSalle5);
 
 using namespace std;
@@ -31,11 +33,11 @@ int main()
 
 void planJeu(void)
 {
-    int numSalle = 0, vie = 0, soin = 0, degatArme = 0, vieBoss = 0, degatBoss = 0, vieMechant = 0, degatMechant = 0;
-    bool cleSalle5 = false;
+    int numSalle = 0, vie = 0, soin = 0, degatArme = 0, vieBoss = 0, degatBoss = 0, vieMechant1 = 0, degatMechant1 = 0,  vieMechant2 = 0;
+    bool clefSalle5 = false, clefSalle7 = false;
 
     //ecranTitre();
-    initialisation(vie, soin, degatArme, vieBoss,  degatBoss, vieMechant, degatMechant);
+    initialisation(vie, soin, degatArme, vieBoss,  degatBoss, vieMechant1, degatMechant1, vieMechant2);
     numSalle = intro();
     do 
     {
@@ -45,19 +47,22 @@ void planJeu(void)
             numSalle = salle1();
             break;
         case 2:
-            numSalle = salle2(cleSalle5);
+            numSalle = salle2(clefSalle5);
             break;
         case 3:
-            numSalle = salle3();
+            numSalle = salle3(clefSalle5);
+            break;
+        case 4:
+            numSalle = salle4(vie, soin, degatArme, vieMechant1, degatMechant1, clefSalle7);
             break;
         case 66:
-            sortie();
+            exit(EXIT_SUCCESS);
             break;
         
         default:
             retour(5);
             tab(5);
-            cout << text::errorSalle;
+            cout << text::erreurSalle;
             retour(5);
             this_thread::sleep_for(8000ms);
             numSalle = -1;
@@ -109,7 +114,7 @@ void ecranTitre(void)
 }
 
 
-void initialisation(int &vie, int &soin, int &degatArme, int& vieBoss, int& degatBoss, int& vieMechant, int& degatMechant)
+void initialisation(int &vie, int &soin, int &degatArme, int& vieBoss, int& degatBoss, int& vieMechant1, int& degatMechant1, int& vieMechant2)
 {
     int chiffreChoix = 0;
     bool verif = true;
@@ -172,7 +177,10 @@ void initialisation(int &vie, int &soin, int &degatArme, int& vieBoss, int& dega
         }
         system("cls");
     } while (verif != true);
-
+    vieMechant1 = constante::PV_MINION;
+    degatMechant1 = constante::DEG_MINION;
+    vieMechant2 = constante::PV_MINION;
+    // les degats des deux mechant font le meme nombre de degat
 }
 
 int intro(void)
@@ -196,17 +204,211 @@ int intro(void)
     cin >> numSalle;
     (numSalle == 1) ? numSalle = 1 : numSalle = 66;
     system("cls");
+    retour(12);
+    tab(4);
+    if (numSalle == 66)
+    {
+        cout << text::messSortie;
+        retour(12);
+        this_thread::sleep_for(5000ms);
+    }
+
     return numSalle;
 }
 
-void sortie(void)
+bool mort(void)
 {
-    retour(12);
-    tab(4);
-    cout << text::messSortie;
-    retour(12);
-    this_thread::sleep_for(5000ms);
-    exit(EXIT_SUCCESS);
+    bool choixFin = false, verif = true;
+    int chiffreChoix = 0;
+    do
+    {
+        system("cls");
+        retour(12);
+        tab(6);
+        cout << "Vous est mort.\n";
+        tab(5);
+        cout << "Voulez vous recommencer ?\n";
+        tab(6);
+        cout << "1 - Oui.\n";
+        tab(6);
+        cout << "2 - Non.\n";
+        tab(6);
+        cout << text::fleche;
+        cin >> chiffreChoix;
+        switch (chiffreChoix)
+        {
+        case 1:
+            system("cls");
+            retour(12);
+            tab(6);
+            cout << "Bon courage a vous.\n";
+            this_thread::sleep_for(3000ms);
+            choixFin = true;
+            break;
+        case 2: 
+            system("cls");
+            retour(12);
+            tab(5);
+            cout << "Ainsi ce termine votre histoire.\n";
+            this_thread::sleep_for(3000ms);
+            exit(EXIT_SUCCESS);
+            choixFin = false;
+            break;
+        default:
+            retour(12);
+            tab(6);
+            cout << text::erreurSaisie;
+            this_thread::sleep_for(3000ms);
+            verif = false;
+        }
+
+    } while (verif != true);
+    return choixFin;
+}
+
+int combat(int& vie, int& soin, int& degatArme, int& vieMechant, int& degatMechant)
+{
+    bool choixFin = false, verif = false;
+    int chiffreChoix = 0, degat = 0, iniJoueur = 0, iniMechant = 0, degatMin = 0, degatMax = 0, choixAleatoire = 0, soinAleatoire = 0, premier = 0;
+    srand(time(NULL));
+    iniJoueur = 1 + rand()%100;
+    iniMechant = 1 + rand() % 100;
+    do
+    {
+        for (int n=1;n<100;n++)
+        {
+            system("cls");
+            tab(4);
+            cout << "Vie : " << vie << "\tPotion de soin : " << soin << "\tVie monstre : " << vieMechant << endl;
+            if (premier == 2)
+            {
+                n = iniJoueur;
+                premier = 0;
+            }
+            else if (premier == 1)
+            {
+                choixAleatoire = rand() % 10;
+                if (choixAleatoire >= 7)
+                {
+                    vie -= degatMechant * 2;
+                    cout << "Le monstre fait une attaque lourde.\n";
+                    cout << "Le monstre vous inflige " << degatMechant * 2 << " de points de degats.\n";
+                    if (vie <= 0) mort();
+                    this_thread::sleep_for(2500ms);
+                }
+                else
+                {
+                    vie -= degatMechant;
+                    cout << "Le monstre vous inflige " << degatMechant << " de points de degats.\n";
+                    if (vie <= 0) mort();
+                    this_thread::sleep_for(2500ms);
+                }
+                premier = 0;
+            }
+
+            if (n == iniJoueur)
+            do {
+                premier = 1;
+                //system("cls");
+                cout << "Votre tour :\n";
+                cout << "1 - Attaquer.\n";
+                cout << "2 - Attaque lourde.\n";
+                cout << "3 - Vous soigner.\n";
+                cout << text::fleche;
+                cin >> chiffreChoix;
+                switch (chiffreChoix)
+                {
+                case 1:
+                    degatMin = degatArme - 2;
+                    degatMax = degatArme + 2;
+                    degat = degatMin + rand() % degatMax;
+                    vieMechant -= degat;
+                    if (vieMechant <= 0) return n = 100;
+                    cout << "Vous attaquer de " << degat << " de points de degats.\n";
+                    cout << "Il reste " << vieMechant << " de vie au monstre.\n";
+                    this_thread::sleep_for(2500ms);
+                    verif = true;
+                    break;
+                case 2:
+                    choixAleatoire = rand()%10;
+                    if (choixAleatoire >= 8)
+                    {
+                        vieMechant = degatArme * 2;
+                        if (vieMechant <= 0) return n = 100;
+                        cout << "Vous attaquer de " << degatArme*2 << " de points de degats.\n";
+                        cout << "Il reste " << vieMechant << " de vie au monstre.\n";
+                        this_thread::sleep_for(2500ms);
+                    }
+                    else
+                    {
+                        cout << "vous n'avez pas reussi a porter le coup au monstre.\n";
+                        this_thread::sleep_for(2500ms);
+                    }
+                    verif = true;
+                    break;
+                case 3:
+                    if (soin > 0)
+                    {
+                        soinAleatoire = 2+ rand() % 10;
+                        vie += soinAleatoire;
+                        cout << "Vous gagner " << soinAleatoire << " points de vie.\n";
+                        soin -= 1;
+                        this_thread::sleep_for(2500ms);
+                    }
+                    else
+                    {
+                        cout << "vous n'avez plus de potion de soin.\n";
+                        this_thread::sleep_for(2500ms);
+                    }
+                    verif = true;
+                    break;
+                default:
+                    retour(12);
+                    tab(6);
+                    cout << text::erreurSaisie;
+                    this_thread::sleep_for(3000ms);
+                    verif = false;
+                }
+            } while (verif != true);
+            else if (n == iniMechant && premier == 0)
+            {
+                premier = 2;
+                choixAleatoire = rand() % 10;
+                if (choixAleatoire >= 7)
+                {
+                    vie -= degatMechant*2;
+                    cout << "Le monstre fait une attaque lourde.\n";
+                    cout << "Le monstre vous inflige " << degatMechant*2 << " de points de degats.\n";
+                    if (vie <= 0) mort();
+                    this_thread::sleep_for(2500ms);
+                }
+                else
+                {
+                    vie -= degatMechant;
+                    cout << "Le monstre vous inflige " << degatMechant << " de points de degats.\n";
+                    if (vie <= 0) mort();
+                    this_thread::sleep_for(2500ms);
+                }
+                
+            }
+            cout << "n : " << n;
+            this_thread::sleep_for(500ms);
+            if (n == 140) n = 100;
+            if (n == iniJoueur || n == iniMechant) n = 1;
+            
+        }
+    } while (vie >= 0 || vieMechant >= 0);
+    if (vie == 0) mort();
+    else
+    {
+        cout << "Vous avez vaincu le monstre.\n";
+        cout << "Vos degats font 2 degat en plus.\n";
+        degatArme += 2;
+        cout << "Vous faites maintenants " << degatArme << " de degats.\n";
+        this_thread::sleep_for(2500ms);
+    }
+    return 1;
+
 }
 
 
@@ -307,36 +509,84 @@ int salle2(bool& clefSalle5)
     int chiffreChoix = 0;
     bool verif = false;
     do {
-        cout << text::desSalle2;
+        system("cls");
+        retour(8);
+        tab(4);
         cout << text::desSalle2_1;
+        tab(6);
         cout << text::desSalle2_2;
+        tab(4);
+        cout << text::desSalle2_3;
+        tab(5);
+        cout << text::desSalle2_4;
+        tab(6);
+        cout << text::propositionSalle2;
+        tab(6);
+        cout << text::choixSalle2_1;
+        tab(6);
+        cout << text::choixSalle2_2;
+        tab(6);
+        cout << text::choixSalle2_3;
+        tab(6);
+        cout << text::choixSalle2_4;
+        tab(6);
+        cout << text::fleche;
         cin >> chiffreChoix;
         switch (chiffreChoix)
         {
         case 1:
-            cout << text::desSalle2_choixChemin2;
+            system("cls");
+            retour(12);
+            tab(2);
+            cout << text::Salle2_choixChemin1;
             numSalle = 4;
             verif = true;
             break;
         case 2:
             if (clefSalle5 == false)
             {
-                cout << text::desSalle2_clef5;
+                system("cls");
+                retour(12);
+                tab(2);
+                cout << text::deSalle2_clef5;
+                this_thread::sleep_for(5000ms);
             }
             else
             {
-                cout << text::desSalle2_choixChemin1;
+                system("cls");
+                retour(12);
+                tab(2);
+                cout << text::Salle2_choixChemin2;
+                this_thread::sleep_for(5000ms);
                 numSalle = 5;
                 verif = true;
             }
             break;
         case 3:
-            cout << text::desSalle2_choixChemin3;
+            system("cls");
+            retour(12);
+            tab(2);
+            cout << text::Salle2_choixChemin3;
+            this_thread::sleep_for(5000ms);
             numSalle = 3;
             verif = true;
             break;
+        case 4:
+            system("cls");
+            retour(12);
+            tab(2);
+            cout << text::Salle2_choixChemin4;
+            this_thread::sleep_for(5000ms);
+            numSalle = 1;
+            verif = true;
+            break;
+
         default:
-            cout << text::errorSalle;
+            system("cls");
+            retour(12);
+            tab(2);
+            cout << text::erreurSalle;
+            this_thread::sleep_for(5000ms);
             break;
         }
        }while (verif == false);
@@ -377,14 +627,123 @@ int salle3(bool& clefSalle5)
             verif = true;
             numSalle = 2;
             break;
+        case 4:
+            system("cls");
+            retour(12);
+            tab(2);
+            cout << text::Salle2_choixChemin4;
+            this_thread::sleep_for(5000ms);
+            numSalle = 1;
+            verif = true;
+            break;
+
         default:
-            cout << text::errorSalle;
-            this_thread::sleep_for(4000ms);
-            verif = false;
+            system("cls");
+            retour(12);
+            tab(2);
+            cout << text::erreurSalle;
+            this_thread::sleep_for(5000ms);
             break;
         }
-    } while (verif != true);
-
+       }while (verif == false);
     return numSalle;
 }
 
+int salle4(int& vie, int& soin, int& degatArme, int& vieMechant1, int& degatMechant1, bool &clefSalle7)
+{
+    int numSalle = 0, chiffreChoix = 0;
+    bool verif = false, resultatCombat = false;
+    do
+    {
+        if (vieMechant1 == 0 && clefSalle7 == true)
+        {
+            do {
+                system("cls");
+                retour(12);
+                tab(6);
+                cout << "Vous avez deja fouillez cette piece.\n";
+                tab(6);
+                cout << "1 - Sortir\n";
+                cout << text::fleche;
+                cin >> chiffreChoix;
+                if (chiffreChoix == 1)
+                {
+                    numSalle = 2;
+                    verif = true;
+                }
+            } while (verif != true);
+            resultatCombat = true;
+
+        }
+        else if (vieMechant1 == 0 && clefSalle7 == false)
+        {
+            do
+            {
+                system("cls");
+                retour(8);
+                tab(5);
+                cout << "La seul chose qui reste d'interret dans cette piece,\n";
+                tab(6);
+                cout << "est ce vieux coffre dans un coin de la piece.\n";
+                tab(6);
+                cout << "Que voulez vous faire ?\n";
+                tab(7);
+                cout << "1 - Ouvrir le coffre.";
+                tab(7);
+                cout << "2 - Retourner dans la deuxiemme salle.";
+                cout << text::fleche;
+                cin >> chiffreChoix;
+                switch (chiffreChoix)
+                {
+                case 1:
+                    system("cls");
+                    retour(12);
+                    tab(6);
+                    cout << "Vous ouvrez le coffre ce qui provoqua un crincement.\n";
+                    tab(6);
+                    cout << "A l'interrieur vous trouvez une veille clef avec le numero 7 graver dessus.\n";
+                    clefSalle7 = true;
+                    verif = true;
+                    break;
+                case 2:
+                    system("cls");
+                    retour(12);
+                    tab(6);
+                    cout << "Vous retourner dans la deuxieme salle.\n";
+                    numSalle = 2;
+                    verif = true;
+                    break;
+                default:
+                    retour(12);
+                    tab(6);
+                    cout << text::erreurSaisie;
+                    break;
+                }
+            } while (verif != true);
+            resultatCombat = true;
+        }
+        else
+        {
+            if (vieMechant1 > 0)
+            {
+                resultatCombat = false;
+            }
+            else
+            {
+                resultatCombat = true;
+            }
+            system("cls");
+            retour(12);
+            tab(5);
+            cout << "Il semblerait qu'un monstre ce trouve dans cette piece.\n";
+            tab(6);
+            cout << "Et il ne semble pas vraiment amicale.\n";
+            this_thread::sleep_for(2500ms);
+            combat(vie, soin, degatArme, vieMechant1, degatMechant1);
+            cout << "bouh";
+
+        }
+    } while (resultatCombat != true);
+
+    return numSalle;
+}
